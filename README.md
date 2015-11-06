@@ -3,12 +3,13 @@
 ## Housekeeping the "L"
 
 - `sudo yum update`
+- `sudo yum install epel-release`
 
 ## Install and configure the "E" - Nginx
 
-- `sudo yum install nginx` 
+- `sudo yum install nginx`
 - `sudo service nginx start`
-- `sudo vi /etc/nginx/conf.d/example.conf 
+- `sudo vi /etc/nginx/conf.d/example.conf`
 ```
 server {
     listen       80;
