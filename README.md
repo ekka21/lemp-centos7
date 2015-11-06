@@ -40,7 +40,7 @@ server {
 ```
 ## Insatll and configure the "M" MySql/MariaDB
 - `sudo yum install mariadb-server mariadb`
-- `sudo service start mariadb`
+- `sudo systemctl start mariadb`
 - `sudo mysql_secure_installation`
 - `mysql -uroot -proot`
 
