@@ -47,4 +47,4 @@ server {
 ## Install and configure the "P" PHP-FPM
 - `sudo yum install php php-mysql php-fpm`
 - `sudo service php-fpm start`
-
+- `php -v`
