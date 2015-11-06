@@ -51,7 +51,7 @@ set -g mouse-resize-pane on
 ```
 server {
     listen       80;
-    server_name  dev.example.com;
+    server_name  example.com www.example.com;
 
     # note that these lines are originally from the "location /" block
     root   /var/www/domains/example.com/www/htdocs;
@@ -104,7 +104,7 @@ on a
 ;                            specific port;
 ;   '/path/to/unix/socket' - to listen on a unix socket.
 ; Note: This value is mandatory.
-listen = 127.0.0.1:9000
+listen = /var/run/php-fpm-example.sock 
 
 ; Set listen(2) backlog. A value of '-1' means unlimited.
 ; Default Value: -1
@@ -128,8 +128,8 @@ server. Many
 ; BSD-derived systems allow connections regardless of permissions.
 ; Default Values: user and group are set as the running user
 ;                 mode is set to 0666
-;listen.owner = nobody
-;listen.group = nobody
+listen.owner = example-com
+listen.group = example-com
 ;listen.mode = 0666
 
 ; Unix user/group of processes
@@ -137,16 +137,13 @@ server. Many
 user's group
 ;       will be used.
 ; RPM: apache Choosed to be able to access some dir as httpd
-user = apache
+user = example-com 
 ; RPM: Keep a group allowed to write in log dir.
-group = apache
+group = example-com
 ```
 
-- Nginx by default uses a TCP `listen = 127.0.0.1:9000`, let change it to
-  unix socket `listen = /var/run/php-fpm/php-fpm-example.sock`
 - `sudo adduser -r example-com`
-- `sudo usermod -aG example-com USER` #appendGroup example-com to
-  USER
+- `sudo usermod -aG example-com USER` #appendGroup example-com to USER
 - `groups USER`
 - `sudo systemctl reload php-fpm`
 - `ps aux | grep php` to check if the socket is running
