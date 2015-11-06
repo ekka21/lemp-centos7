@@ -4,7 +4,7 @@
 
 - `sudo yum update`
 - `sudo yum install epel-release tmux git`
-- `vi ~/.bashrc`
+- `vi ~/.bashrc` #optional
 ```
 alias lsa="ls -la"
 alias ..="cd .."
@@ -15,7 +15,7 @@ alias nx="cd /etc/nginx"
 alias phpconfig="cd /etc/php-fpm.d/"
 ```
 
-- `vi ~/.tmux.conf`
+- `vi ~/.tmux.conf` #optional
 ```
 unbind C-b
 set-option -g prefix C-a
@@ -45,8 +45,11 @@ set -g mouse-resize-pane on
 ## Install the "E" - Nginx
 
 - `sudo yum install nginx`
+- `sudo systemctl status nginx`
 - `sudo systemctl start nginx`
 - `sudo systemctl status nginx`
+
+### Adding a new vhost
 - `sudo vi /etc/nginx/conf.d/example.conf`
 ```
 server {
@@ -76,6 +79,7 @@ server {
 ```
 <?php phpinfo();
 ```
+
 ## Insatll the "M" MySql/MariaDB
 - `sudo yum install mariadb-server mariadb`
 - `sudo systemctl start mariadb`
@@ -84,9 +88,9 @@ server {
 
 ## Install the "P" PHP-FPM
 - `sudo yum install php php-mysql php-fpm`
+- `sudo systemctl status php-fpm`
 - `sudo systemctl start php-fpm`
 - `sudo systemctl status php-fpm`
-- `php -v`
 
 ## Configure PHP-FPM
 - `sudo vi /etc/php-fpm.d/www.conf`
