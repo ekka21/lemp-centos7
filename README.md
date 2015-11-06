@@ -33,13 +33,18 @@ server {
     }
 }
 ```
-
+- `sudo mkdir -p /var/www/domains/example.com/www/htdocs`
+- `sudo vi /var/www/domains/example.com/www/htdocs/index.php`
+```
+<?php phpinfo();
+```
 ## Insatll and configure the "M" MySql/MariaDB
 - `sudo yum install mariadb-server mariadb`
 - `sudo service start mariadb`
 - `sudo mysql_secure_installation`
+- `mysql -uroot -proot`
 
 ## Install and configure the "P" PHP-FPM
-- `sudo yum install php php-mysql php-fpm php-cli`
+- `sudo yum install php php-mysql php-fpm`
 - `sudo service php-fpm start`
 
