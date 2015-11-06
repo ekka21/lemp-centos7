@@ -88,7 +88,6 @@ server {
 
 ## Configure PHP-FPM
 - `sudo vi /etc/php-fpm.d/www.conf`
-- 
 ```
 ; Start a new pool named 'www'.
 [www]
@@ -103,7 +102,7 @@ on a
 ;                            specific port;
 ;   '/path/to/unix/socket' - to listen on a unix socket.
 ; Note: This value is mandatory.
-listen = /var/run/php5-fpm.sock 
+listen = 127.0.0.1:9000
 
 ; Set listen(2) backlog. A value of '-1' means unlimited.
 ; Default Value: -1
@@ -111,12 +110,12 @@ listen = /var/run/php5-fpm.sock
 
 ; List of ipv4 addresses of FastCGI clients which are allowed to
 connect.
-; Equivalent to the FCGI_WEB_SERVER_ADDRS environment variable in
-the original
-; PHP FCGI (5.2.2+). Makes sense only with a tcp listening
-socket. Each address
-; must be separated by a comma. If this value is left blank,
-connections will be
+; Equivalent to the FCGI_WEB_SERVER_ADDRS environment variable in the
+original
+; PHP FCGI (5.2.2+). Makes sense only with a tcp listening socket. Each
+address
+; must be separated by a comma. If this value is left blank, connections
+will be
 ; accepted from any ip address.
 ; Default Value: any
 listen.allowed_clients = 127.0.0.1
@@ -127,8 +126,8 @@ server. Many
 ; BSD-derived systems allow connections regardless of permissions.
 ; Default Values: user and group are set as the running user
 ;                 mode is set to 0666
-listen.owner = nginx 
-listen.group = nginx 
+;listen.owner = nobody
+;listen.group = nobody
 ;listen.mode = 0666
 
 ; Unix user/group of processes
@@ -136,7 +135,13 @@ listen.group = nginx
 user's group
 ;       will be used.
 ; RPM: apache Choosed to be able to access some dir as httpd
-user = nginx
+user = apache
 ; RPM: Keep a group allowed to write in log dir.
-group = nginx 
+group = apache
 ```
+
+- Nginx by default uses a TCP `listen = 127.0.0.1:9000`, let change it to
+  unix socket `listen = /var/run/php-fpm/php-fpm.sock`
+- `sudo systemctl reload php-fpm`
+- `ps aux | grep php` to check if the socket is running
+
