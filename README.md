@@ -25,7 +25,7 @@ unbind %
 bind s split-window -v
 unbind '"'
 bind v split-window -h
-.
+
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
@@ -45,7 +45,7 @@ set -g mouse-resize-pane on
 ## Install the "E" - Nginx
 
 - `sudo yum install nginx`
-- `sudo systemctl nginx start`
+- `sudo systemctl start nginx`
 - `sudo systemctl status nginx`
 - `sudo vi /etc/nginx/conf.d/example.conf`
 ```
@@ -63,7 +63,7 @@ server {
 
     location ~ \.php$ {
         try_files $uri =404;
-        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_pass unix:/var/run/php-fpm-example.sock;
         fastcgi_index index.php;
         fastcgi_param
         SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -84,7 +84,8 @@ server {
 
 ## Install the "P" PHP-FPM
 - `sudo yum install php php-mysql php-fpm`
-- `sudo service php-fpm start`
+- `sudo systemctl start php-fpm`
+- `sudo systemctl status php-fpm`
 - `php -v`
 
 ## Configure PHP-FPM
@@ -142,7 +143,11 @@ group = apache
 ```
 
 - Nginx by default uses a TCP `listen = 127.0.0.1:9000`, let change it to
-  unix socket `listen = /var/run/php-fpm/php-fpm.sock`
+  unix socket `listen = /var/run/php-fpm/php-fpm-example.sock`
+- `sudo adduser -r example-com`
+- `sudo usermod -aG example-com USER` #appendGroup example-com to
+  USER
+- `groups USER`
 - `sudo systemctl reload php-fpm`
 - `ps aux | grep php` to check if the socket is running
 
