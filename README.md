@@ -45,7 +45,8 @@ set -g mouse-resize-pane on
 ## Install the "E" - Nginx
 
 - `sudo yum install nginx`
-- `sudo service nginx start`
+- `sudo systemctl nginx start`
+- `sudo systemctl status nginx`
 - `sudo vi /etc/nginx/conf.d/example.conf`
 ```
 server {
