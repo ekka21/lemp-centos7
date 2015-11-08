@@ -1,14 +1,22 @@
 # -*- mode: ruby -*-
-# vi: set ft=ruby :
+# # vi: set ft=ruby :
+#
+VAGRANTFILE_API_VERSION = "2"
 
-Vagrant.configure(2) do |config|
-
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "puppetlabs/centos-7.0-64-puppet"
+    config.ssh.insert_key = false
 
-    config.vm.network "private_network", ip: "192.168.33.10"
-    config.vm.network "forwarded_port", guest: 80, host: 8080
-    config.vm.network "forwarded_port", guest: 3306, host: 33060
+    config.vm.provider :virtualbox do |v|
+        v.name = "lemp"
+        v.memory = 1024
+        v.cpus = 2
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
 
-    config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.hostname = "lemp"
+    config.vm.network :private_network, ip: "192.168.33.34"
+
 
 end
